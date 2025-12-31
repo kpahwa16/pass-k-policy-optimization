@@ -1,0 +1,46 @@
+
+PKPO EXPERIMENT SUMMARY REPORT
+==============================
+Generated: 2025-12-31 21:45:13
+Total Runtime: 619.0 seconds
+
+1. KEY FINDINGS FROM TOY EXAMPLE
+--------------------------------
+Optimal θ for different k values:
+  k =  1: θ* = 0.871, max_g@k = 0.6608, P(x > 1) = 9.93%
+  k =  2: θ* = 0.900, max_g@k = 0.8004, P(x > 1) = 15.87%
+  k =  4: θ* = 0.943, max_g@k = 0.8921, P(x > 1) = 28.39%
+  k =  8: θ* = 0.971, max_g@k = 0.9440, P(x > 1) = 38.75%
+  k = 16: θ* = 0.986, max_g@k = 0.9706, P(x > 1) = 44.32%
+
+Key Insight: Higher k leads to more risk-tolerant policies (θ closer to 1),
+accepting some samples beyond the boundary to maximize the chance of 
+hitting the high-reward region.
+
+2. VARIANCE REDUCTION EFFECTIVENESS
+-----------------------------------
+The s^(loo-1) estimator (Equation 33) provides the lowest variance,
+especially as the number of samples n increases. This is crucial for
+stable training in practice.
+
+3. TRAINING RESULTS
+-------------------
+Final θ values after training:
+  k_opt = 1: θ = 0.8926
+  k_opt = 2: θ = 0.9077
+  k_opt = 4: θ = 0.9431
+  k_opt = 8: θ = 0.9654
+  k_annealed: θ = 0.8938
+
+4. CONCLUSIONS
+--------------
+1. PKPO enables direct optimization of pass@k for any k ≤ n
+2. Higher k encourages exploration and more diverse solutions
+3. The s^(loo-1) estimator provides stable, low-variance gradients
+4. K annealing can achieve strong performance on both pass@1 and pass@k
+
+5. NEXT STEPS
+-------------
+- Scale to larger models (GEMMA, LLAMA)
+- Apply to real tasks (MATH, Coding, ARC-AGI)
+- Experiment with continuous reward functions
